@@ -13,6 +13,7 @@ from langchain_experimental.utilities import PythonREPL
 import matplotlib
 from langchain_community.tools.tavily_search import TavilySearchResults
 import requests
+from security import safe_requests
 
 load_dotenv()
 max_tokens = 2000
@@ -76,7 +77,7 @@ def python_repl_tool(
 tavily_tool = TavilySearchResults(max_results=5)
 
 def get_natural_gas():
-    response = requests.get(
+    response = safe_requests.get(
         "https://www.alphavantage.co/query/",
         params={
             "function": "NATURAL_GAS",

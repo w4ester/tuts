@@ -1,7 +1,6 @@
 from __future__ import annotations as _annotations
 import os
 import re
-import requests
 import asyncio
 from colorama import Fore
 from dotenv import load_dotenv
@@ -17,6 +16,7 @@ from pydantic_graph import BaseNode, End, Graph, GraphRunContext
 from pydantic_ai.models.openai import OpenAIModel
 from pydantic_ai.models.ollama import OllamaModel
 from tavily import TavilyClient
+from security import safe_requests
 
 # Load the environment variables
 load_dotenv()
@@ -125,7 +125,7 @@ def get_product_details(ctx: RunContext[str]) -> str:
     Args:
         ctx: the context object
     """
-    response = requests.get(ctx.deps.url)
+    response = safe_requests.get(ctx.deps.url)
     soup = BeautifulSoup(response.content, 'html.parser')
     text = soup.get_text()
     ctx.deps.num_rounds += 1
