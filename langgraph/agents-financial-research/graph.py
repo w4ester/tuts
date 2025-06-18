@@ -82,7 +82,7 @@ def get_natural_gas():
             "function": "NATURAL_GAS",
             "apikey": os.getenv("ALPHAVANTAGE_API_KEY"),
         },
-    )
+    timeout=60)
     response.raise_for_status()
     data = response.json()
 
@@ -103,7 +103,7 @@ def alpha_vantage_tool():
 def get_gdp_data(country_code: str):
     response = requests.get(
         "https://www.imf.org/external/datamapper/api/v1/NGDP_RPCH",
-    )
+    timeout=60)
     response.raise_for_status()
     data = response.json()
 

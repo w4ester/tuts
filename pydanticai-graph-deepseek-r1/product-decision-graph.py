@@ -125,7 +125,7 @@ def get_product_details(ctx: RunContext[str]) -> str:
     Args:
         ctx: the context object
     """
-    response = requests.get(ctx.deps.url)
+    response = requests.get(ctx.deps.url, timeout=60)
     soup = BeautifulSoup(response.content, 'html.parser')
     text = soup.get_text()
     ctx.deps.num_rounds += 1
